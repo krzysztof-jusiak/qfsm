@@ -24,7 +24,6 @@
 #include <boost/preprocessor/punctuation/comma_if.hpp>
 #include <boost/preprocessor/repetition/repeat.hpp>
 #include <boost/preprocessor/iteration/local.hpp>
-#include "QFsm/Back/Aux/Detail/ResultOf.hpp"
 
 namespace QFsm
 {
@@ -36,11 +35,12 @@ namespace Detail
 template<typename TRawEvent, typename TKey, typename TExecuteEvent> class DefaultDispatchType
 {
 public:
-    typedef std::map<TKey, TExecuteEvent> type;
+    typedef std::map<TKey, TExecuteEvent> Type;
+    typedef boost::tuple<T, int> ResultType;
 
     template<typename T> static inline void init(T&) { }
     template<typename T> static inline bool check(T& p_entries, const TKey& p_key) { return p_entries.find(p_key) != p_entries.end(); }
-    template<typename T> static inline boost::tuple<T> create(const TRawEvent& p_event) { return boost::tuple<T>(T(*p_event)); }
+    template<typename T> static inline boost::tuple<T> create(TRawEvent p_event) { return boost::tuple<T>(T(*p_event)); }
     template<typename T> static inline TKey getId(const T& p_event) { return *p_event; }
     template<typename T> struct GetId { enum { value = T::value }; };
     template<typename T> struct GetType { typedef typename T::type type; };
@@ -59,7 +59,7 @@ class Dispatcher
     class IDispatchTable
     {
     public:
-        virtual bool dispatch(const TRawEvent&) = 0;
+        virtual bool dispatch(TRawEvent) = 0;
         virtual ~IDispatchTable() { }
     };
 
@@ -76,7 +76,7 @@ class Dispatcher
             static const bool value = sizeof(check<T0>(0)) == sizeof(boost::mpl::aux::yes_tag);
         };
 
-        typedef bool (*ExecuteEvent)(Handler&, const TRawEvent&);
+        typedef bool (*ExecuteEvent)(Handler&, TRawEvent);
         typedef TDispatchType<TRawEvent, TEventId, ExecuteEvent> DispatchType;
         typedef typename DispatchType::type EntriesType;
 
@@ -85,7 +85,7 @@ class Dispatcher
         template<typename Size, bool dummy = false> class DispatchImpl;
 
 #       define BOOST_PP_LOCAL_LIMITS (0, BOOST_MPL_LIMIT_VECTOR_SIZE)
-#       define DISPATCH_IMPL(z, n, data) BOOST_PP_COMMA_IF(n) boost::get<n>(data)
+#       define QFSM_DISPATCH_IMPL(z, n, data) BOOST_PP_COMMA_IF(n) boost::get<n>(data)
 
 #       define BOOST_PP_LOCAL_MACRO(n)\
             template<bool dummy>\
@@ -94,13 +94,13 @@ class Dispatcher
             public:\
                 template<typename T> static void execute(Handler& p_handler, const T& p_data)\
                 {\
-                    p_handler.processEvent(BOOST_PP_REPEAT(n, DISPATCH_IMPL, p_data));\
+                    p_handler.processEvent(BOOST_PP_REPEAT(n, QFSM_DISPATCH_IMPL, p_data));\
                 }\
             };
 
 #       include BOOST_PP_LOCAL_ITERATE()
 
-#undef  DISPATCH_IMPL
+#undef  QFSM_DISPATCH_IMPL
 
     public:
         explicit DispatchTable(Handler& p_handler)
@@ -110,7 +110,7 @@ class Dispatcher
             fillEntries<Events>();
         }
 
-        bool inline dispatch(const TRawEvent& p_rawEvent)
+        bool inline dispatch(TRawEvent p_rawEvent)
         {
             return dispatch(DispatchType::getId(p_rawEvent), p_rawEvent, HasCheck<>());
         }
@@ -134,12 +134,12 @@ class Dispatcher
             entries[Event::value] = &DispatchTable::template dispatchImpl<typename DispatchType::template GetType<Event>::type>;
         }
 
-        bool dispatch(const TEventId& p_id, const TRawEvent& p_rawEvent, const HasCheck<false>&)
+        bool dispatch(const TEventId& p_id, TRawEvent p_rawEvent, const HasCheck<false>&)
         {
             return entries[p_id](handler, p_rawEvent);
         }
 
-        bool dispatch(const TEventId& p_id, const TRawEvent& p_rawEvent, const HasCheck<true>&)
+        bool dispatch(const TEventId& p_id, TRawEvent p_rawEvent, const HasCheck<true>&)
         {
             if (!DispatchType::template check(entries, p_id))
             {
@@ -149,15 +149,15 @@ class Dispatcher
             return entries[p_id](handler, p_rawEvent);
         }
 
-        template<typename Event> static bool dispatchImpl(Handler& p_handler, const TRawEvent& p_rawEvent)
+        template<typename Event> static bool dispatchImpl(Handler& p_handler, TRawEvent p_rawEvent)
         {
             dispatchImpl<Event>(p_handler, p_rawEvent, &DispatchType::template create<Event>);
             return true;
         }
 
-        template<typename Event, typename F> static void dispatchImpl(Handler& p_handler, const TRawEvent& p_rawEvent, const F&)
+        template<typename Event, typename F> static void dispatchImpl(Handler& p_handler, TRawEvent p_rawEvent, const F&)
         {
-            DispatchImpl< boost::mpl::int_<boost::tuples::length<typename Back::Aux::Detail::ResultOf<F>::type>::value> >::template
+            DispatchImpl< boost::mpl::int_<boost::tuples::length<typename QFsm::Aux::ResultOf<F>::type>::value> >::template
                 execute(p_handler, DispatchType::template create<Event>(p_rawEvent));
         }
 
@@ -195,6 +195,12 @@ public:
         m_dispatchers.push_back(boost::shared_ptr<Dispatcher>(new Dispatcher(p_handler)));
     }
 
+    template<typename Handler> void registerHandler(Handler& p_handler, typename boost::enable_if< boost::mpl::has_Event<Handler> >::type* = 0)
+    {
+        typedef DispatchTable<Handler, typename Handler::Events> Dispatcher;
+        m_dispatchers.push_back(boost::shared_ptr<Dispatcher>(new Dispatcher(p_handler)));
+    }
+
     template<typename Handler> void registerHandler(Handler& p_handler)
     {
         typedef DispatchTable<Handler, typename Handler::Events> Dispatcher;
@@ -206,7 +212,7 @@ public:
      * @param p_rawEvent event to be dispatched
      * @return true if any of registered handlers accept the event, false otherwise
      */
-    bool dispatch(const TRawEvent& p_rawEvent)
+    bool dispatch(TRawEvent p_rawEvent)
     {
         bool l_dispatched = false;
 
