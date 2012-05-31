@@ -1,0 +1,83 @@
+%title QFsm
+[mailto:krzysztof_at_jusiak_dot_net Copyright © 2011-2012 Krzysztof Jusiak (krzysztof at jusiak dot net)]
+<br>
+[http://www.boost.org/LICENSE_1_0.txt Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)]
+
+----
+====== User' guide ======
+    * [[Motivation]]
+    * [[UmlShortGuide|UML Short Guide]]
+    * [[Comparision|Comparision to other FSM C++ frameworks]]
+    * Examples
+        * [[HelloWorld|Hello World]]
+    * [[Design]]
+        * Front
+            * End
+                * [[Default]]
+                * [[Fusion]]
+            * Basic Features
+                * [[CtorFsm|Constructing FSM]]
+                    * [[InPlaceFsm|In place FSM]]
+                * [[Transitions]]
+                * [[ActionGuards|Actions/Guards]]
+                * [[InitialState|Initial state]]
+                * [[EventDispatching|Event dispatching (processEvent)]]
+                * [[HandleUnexpectedEvent|Handle unexpected event]]
+                * [[StartStop|Starting, stopping state machine]]
+                * [[SetGet|Set/Get actions/guards]]
+                * [[Logging]]
+                * [[Visitor]]
+                * Operations
+                    * [[And]]
+                    * [[Bind]]
+                    * [[Not]]
+                    * [[Or]]
+                    * [[Seq]]
+                    * [[Transition]]
+            * Extensions
+                * UML
+                    * [[EntryAction|Entry action]]
+                    * [[ExitAction|Exit Action]]
+                    * [[EventDeferral|Event deferral]]
+                    * [[InternalEvent|Internal Event]]
+                    * [[CompletionTransition|Completion/Anonymous transition]]
+                    * [[TerminateState|Terminate state]]
+                    * [[CompositeState|Composite/hierarchically nested state]]
+                    * [[OrthogonalRegions|Orthogonal regions]]
+                        * [[Orthogonality|Check orthogonality]]
+                * Non Uml
+                    * [[InterruptState|Interrupt state]]
+                    * [[ElseTransition|Else transition]]
+                    * [[FsmEvents|Fsm Events]]
+                    * [[FinishTransition|Finish / IsFinished transition]]
+            * [[Interface|Interface/optional]]
+                * [[IAction|IAction]]
+                * [[IGuard|IGuard]]
+                * [[ILogger|ILogger]]
+        * Back
+            * End
+                * [[FavorExecutionSpeed|Favor Execution Speed]]
+                * [[FavorCompilationTime|Favor Compilation Time]]
+                * [[FavorDebugSize|Favor Debug Size]]
+            * [[BackEnd|Choosing Back End (Policy)]]
+        * Utility
+            * [[Dispatcher]]
+            * [[Virtual|Virtual Fsm]]
+                * [[IFsm]]
+                * [[VFsm]]
+    * Scripts
+        * [[GenStateDiagram|UML state diagram generation]]
+    * FSM testing
+        * [[Tests|What to test ?]]
+        * [[FsmTests|How to write FSM tests ?]]
+    * Internal Interface
+        * [[WritingBackEnd|Writing own Back End]]
+        * [[WritingFrontEnd|Writing own Front End]]
+    * [[Comparison|Performance / Compilers / Comparison]]
+    * [[FAQ|Questions & Answers]]
+        * [[QAEmulateSuperState|How to emulate super state ?]]
+        * [[QADispatchEvents|How to dispatch non typed events ?]]
+        * [[QAComplex|Complex example ?]]
+    * [[VersionHistory|Version history]]
+----
+

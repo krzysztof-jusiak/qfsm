@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+    <head>
+        <link rel="Stylesheet" type="text/css" href="../styles/style.css">
+
+        <link type="text/css" rel="stylesheet" href="../styles/shCore.css" />
+        <link type="text/css" rel="stylesheet" href="../styles/shThemeDefault.css" />
+
+        <script type="text/javascript" src="../scripts/shCore.js"></script>
+        <script type="text/javascript" src="../scripts/shBrushCpp.js"></script>
+
+        <script type="text/javascript">
+            SyntaxHighlighter.defaults['collapse'] = true;
+            SyntaxHighlighter.all();
+        </script>
+
+        <title>QFsm</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    </head>
+
+    <body>
+        <h3 id="toc_0.0.1"><strong>Quick Finite State Machine</strong></h3>
+
+        
+<p>
+<a href="mailto:krzysztof_at_jusiak_dot_net">Copyright © 2011-2012 Krzysztof Jusiak (krzysztof at jusiak dot net)</a>
+<br>
+<a href="http://www.boost.org/LICENSE_1_0.txt">Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)</a>
+</p>
+
+<hr />
+<h6 id="toc_0.0.0.0.0.1">User' guide</h6>
+<ul>
+<li>
+<a href="Motivation.html">Motivation</a>
+
+<li>
+<a href="UmlShortGuide.html">UML Short Guide</a>
+
+<li>
+<a href="Comparision.html">Comparision to other FSM C++ frameworks</a>
+
+<li>
+Examples
+
+<ul>
+<li>
+<a href="HelloWorld.html">Hello World</a>
+
+</ul>
+<li>
+<a href="Design.html">Design</a>
+
+<ul>
+<li>
+Front
+
+<ul>
+<li>
+End
+
+<ul>
+<li>
+<a href="Default.html">Default</a>
+
+<li>
+<a href="Fusion.html">Fusion</a>
+
+</ul>
+<li>
+Basic Features
+
+<ul>
+<li>
+<a href="CtorFsm.html">Constructing FSM</a>
+
+<ul>
+<li>
+<a href="InPlaceFsm.html">In place FSM</a>
+
+</ul>
+<li>
+<a href="Transitions.html">Transitions</a>
+
+<li>
+<a href="ActionGuards.html">Actions/Guards</a>
+
+<li>
+<a href="InitialState.html">Initial state</a>
+
+<li>
+<a href="EventDispatching.html">Event dispatching (processEvent)</a>
+
+<li>
+<a href="HandleUnexpectedEvent.html">Handle unexpected event</a>
+
+<li>
+<a href="StartStop.html">Starting, stopping state machine</a>
+
+<li>
+<a href="SetGet.html">Set/Get actions/guards</a>
+
+<li>
+<a href="Logging.html">Logging</a>
+
+<li>
+<a href="Visitor.html">Visitor</a>
+
+<li>
+Operations
+
+<ul>
+<li>
+<a href="And.html">And</a>
+
+<li>
+<a href="Bind.html">Bind</a>
+
+<li>
+<a href="Not.html">Not</a>
+
+<li>
+<a href="Or.html">Or</a>
+
+<li>
+<a href="Seq.html">Seq</a>
+
+<li>
+<a href="Transition.html">Transition</a>
+
+</ul>
+</ul>
+<li>
+Extensions
+
+<ul>
+<li>
+UML
+
+<ul>
+<li>
+<a href="EntryAction.html">Entry action</a>
+
+<li>
+<a href="ExitAction.html">Exit Action</a>
+
+<li>
+<a href="EventDeferral.html">Event deferral</a>
+
+<li>
+<a href="InternalEvent.html">Internal Event</a>
+
+<li>
+<a href="CompletionTransition.html">Completion/Anonymous transition</a>
+
+<li>
+<a href="TerminateState.html">Terminate state</a>
+
+<li>
+<a href="CompositeState.html">Composite/hierarchically nested state</a>
+
+<li>
+<a href="OrthogonalRegions.html">Orthogonal regions</a>
+
+<ul>
+<li>
+<a href="Orthogonality.html">Check orthogonality</a>
+
+</ul>
+</ul>
+<li>
+Non Uml
+
+<ul>
+<li>
+<a href="InterruptState.html">Interrupt state</a>
+
+<li>
+<a href="ElseTransition.html">Else transition</a>
+
+<li>
+<a href="FsmEvents.html">Fsm Events</a>
+
+<li>
+<a href="FinishTransition.html">Finish / IsFinished transition</a>
+
+</ul>
+</ul>
+<li>
+<a href="Interface.html">Interface/optional</a>
+
+<ul>
+<li>
+<a href="IAction.html">IAction</a>
+
+<li>
+<a href="IGuard.html">IGuard</a>
+
+<li>
+<a href="ILogger.html">ILogger</a>
+
+</ul>
+</ul>
+<li>
+Back
+
+<ul>
+<li>
+End
+
+<ul>
+<li>
+<a href="FavorExecutionSpeed.html">Favor Execution Speed</a>
+
+<li>
+<a href="FavorCompilationTime.html">Favor Compilation Time</a>
+
+<li>
+<a href="FavorDebugSize.html">Favor Debug Size</a>
+
+</ul>
+<li>
+<a href="BackEnd.html">Choosing Back End (Policy)</a>
+
+</ul>
+<li>
+Utility
+
+<ul>
+<li>
+<a href="Dispatcher.html">Dispatcher</a>
+
+<li>
+<a href="Virtual.html">Virtual Fsm</a>
+
+<ul>
+<li>
+<a href="IFsm.html">IFsm</a>
+
+<li>
+<a href="VFsm.html">VFsm</a>
+
+</ul>
+</ul>
+</ul>
+<li>
+Scripts
+
+<ul>
+<li>
+<a href="GenStateDiagram.html">UML state diagram generation</a>
+
+</ul>
+<li>
+FSM testing
+
+<ul>
+<li>
+<a href="Tests.html">What to test ?</a>
+
+<li>
+<a href="FsmTests.html">How to write FSM tests ?</a>
+
+</ul>
+<li>
+Internal Interface
+
+<ul>
+<li>
+<a href="WritingBackEnd.html">Writing own Back End</a>
+
+<li>
+<a href="WritingFrontEnd.html">Writing own Front End</a>
+
+</ul>
+<li>
+<a href="Comparison.html">Performance / Compilers / Comparison</a>
+
+<li>
+<a href="FAQ.html">Questions &amp; Answers</a>
+
+<ul>
+<li>
+<a href="QAEmulateSuperState.html">How to emulate super state ?</a>
+
+<li>
+<a href="QADispatchEvents.html">How to dispatch non typed events ?</a>
+
+<li>
+<a href="QAComplex.html">Complex example ?</a>
+
+</ul>
+<li>
+<a href="VersionHistory.html">Version history</a>
+
+</ul>
+<hr />
+
+    </body>
+
+</html>
+

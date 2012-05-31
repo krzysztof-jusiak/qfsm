@@ -1,0 +1,10 @@
+----
+
+{{{class="brush: c++"
+    <?include="../Examples/HowToWriteFsmTests.cpp">
+}}}
+
+----
+[[index|back]]
+
+

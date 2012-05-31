@@ -1,0 +1,9 @@
+----
+
+{{{class="brush: c++"
+    <?include="../Examples/BasicFeatures/IGuard.cpp">
+}}}
+
+----
+[[index|back]]
+

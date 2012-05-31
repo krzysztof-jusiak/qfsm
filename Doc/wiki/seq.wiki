@@ -1,0 +1,9 @@
+----
+
+{{{class="brush: c++"
+    <?include="../Examples/BasicFeatures/Operations/Seq.cpp">
+}}}
+
+----
+[[index|back]]
+

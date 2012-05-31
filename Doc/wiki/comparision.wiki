@@ -1,0 +1,24 @@
+----
+
+* Quick Finite State Machine vs Boost Meta State Machine:
+    * action driven instead of fsm driven data
+    * logging policy integrated
+    * policies: favor debug size, compilation time, execution speed (see comparison report)
+    * quicker (execution speed policy)
+    * faster compilation
+    * less debug size
+    * compile on gcc 3.4
+    * all features may be only found on transition table
+    * fsm and states are only abstraction
+    * Fusion front end instead of EUML
+    * state machine diagram script included
+    * optional virtual interfaces
+    * dispatcher integrated
+    * no deep, shallow history
+    * no serialization
+    
+* Quick Finite State Machine vs Boost State Chart
+
+----
+[[index|back]]
+
