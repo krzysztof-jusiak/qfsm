@@ -5,6 +5,8 @@ Quick Finite State Machine (QFsm)
 QFsm is proof-of-concept, header only library implementing Finite State Machine concept.
 
 ### Hello World
+
+```cpp
 struct Guard {
     template<typename TEvent>
     bool operator()(const TEvent&) const { return true; }
@@ -43,10 +45,11 @@ int main() {
     fsm.processEvent(event1());
     fsm.visitCurrentStates(ShowCurrentStateVisitor());
 }
+```
 
 ## Papers
- * [https://docs.google.com/viewer?url=https%3A%2F%2Fgithub.com%2Fkrzysztof-jusiak%2Fdoc%2Fblob%2Fmaster%2Ffsms%2Fdoc%2Ffsms.pdf%3Fraw%3Dtrue](C++ Finite-state machine frameworks comparison)
- * [https://docs.google.com/viewer?url=https%3A%2F%2Fgithub.com%2Fkrzysztof-jusiak%2Fdoc%2Fblob%2Fmaster%2Fdispatchers%2Fdoc%2Fdispatchers.pdf%3Fraw%3Dtrue](C++ dispatching concepts comparison)
+ * [C++ Finite-state machine frameworks comparison](https://docs.google.com/viewer?url=https%3A%2F%2Fgithub.com%2Fkrzysztof-jusiak%2Fdoc%2Fblob%2Fmaster%2Ffsms%2Fdoc%2Ffsms.pdf%3Fraw%3Dtrue)
+ * [C++ dispatching concepts comparison](https://docs.google.com/viewer?url=https%3A%2F%2Fgithub.com%2Fkrzysztof-jusiak%2Fdoc%2Fblob%2Fmaster%2Fdispatchers%2Fdoc%2Fdispatchers.pdf%3Fraw%3Dtrue)
 
 ## Key features
 * Header only
